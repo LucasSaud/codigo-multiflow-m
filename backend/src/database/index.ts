@@ -64,6 +64,7 @@ import WebhookLink from "../models/WebhookLink";
 import WebhookLinkLog from "../models/WebhookLinkLog";
 import EmailTemplate from "../models/EmailTemplate";
 import EmailLog from "../models/EmailLog";
+import EmailConfig from "../models/EmailConfig";
 
 // eslint-disable-next-line
 const dbConfig = require("../config/database");
@@ -136,6 +137,7 @@ const models = [
   WebhookLinkLog,
   EmailTemplate,
   EmailLog,
+  EmailConfig,
 ];
 
 sequelize.addModels(models);

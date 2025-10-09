@@ -62,7 +62,7 @@ import toastError from "../errors/toastError";
 import usePlans from "../hooks/usePlans";
 import useVersion from "../hooks/useVersion";
 import { i18n } from "../translate/i18n";
-import { Campaign, ShapeLine, Webhook, Email } from "@mui/icons-material";
+import { Campaign, ShapeLine, Webhook, Email, Settings } from "@mui/icons-material";
 
 import useCompanySettings from "../hooks/useSettings/companySettings";
 
@@ -919,6 +919,13 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 to="/email-templates"
                 primary={"Templates de Email"}
                 icon={<Email />}
+                tooltip={collapsed}
+              />
+
+              <ListItemLink
+                to="/email-config"
+                primary={"Configuração SMTP"}
+                icon={<Settings />}
                 tooltip={collapsed}
               />
             </List>

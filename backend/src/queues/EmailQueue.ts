@@ -62,7 +62,7 @@ emailQueue.process("send-email", async (job: Bull.Job<EmailJobData>) => {
       to: data.to,
       subject: data.subject,
       html: data.html,
-      // from: `${data.fromName} <${data.from}>` // Comentado pois SendMail usa process.env.MAIL_FROM
+      companyId: data.companyId // Passa companyId para usar config específica da empresa
     });
 
     // Atualizar log de sucesso

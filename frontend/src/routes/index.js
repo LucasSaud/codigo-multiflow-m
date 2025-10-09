@@ -52,6 +52,7 @@ import CampaignsPhrase from "../pages/CampaignsPhrase";
 import { Plantao } from "../pages/Plantao";
 import WebhookLinks from "../pages/WebhookLinks";
 import EmailTemplates from "../pages/EmailTemplates";
+import EmailConfig from "../pages/EmailConfig";
 
 const Routes = () => {
   const [showCampaigns, setShowCampaigns] = useState(false);
@@ -219,6 +220,12 @@ const Routes = () => {
                   exact
                   path="/email-templates"
                   component={EmailTemplates}
+                  isPrivate
+                />
+                <Route
+                  exact
+                  path="/email-config"
+                  component={EmailConfig}
                   isPrivate
                 />
 
