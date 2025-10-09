@@ -19,13 +19,17 @@ interface EmailJobData {
 }
 
 // Criar fila de emails
-const emailQueue = new Bull("email-queue", {
-  redis: {
-    host: process.env.REDIS_HOST || "localhost",
-    port: parseInt(process.env.REDIS_PORT || "6379"),
-    password: process.env.REDIS_PASSWORD || undefined,
-    db: parseInt(process.env.REDIS_DB || "0")
-  },
+// Suporta tanto REDIS_URI quanto variáveis individuais
+const redisConfig = process.env.REDIS_URI
+  ? process.env.REDIS_URI
+  : {
+      host: process.env.REDIS_HOST || "localhost",
+      port: parseInt(process.env.REDIS_PORT || "6379"),
+      password: process.env.REDIS_PASSWORD || undefined,
+      db: parseInt(process.env.REDIS_DB || "0")
+    };
+
+const emailQueue = new Bull("email-queue", redisConfig, {
   defaultJobOptions: {
     removeOnComplete: 100,
     removeOnFail: 50,
