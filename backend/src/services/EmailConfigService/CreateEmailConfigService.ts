@@ -32,12 +32,22 @@ const CreateEmailConfigService = async (data: Request): Promise<EmailConfig> => 
     throw new AppError(err.message, 400);
   }
 
-  // Verificar se já existe config ativa para essa empresa
+  // REGRA DE NEGÓCIO: Apenas 1 configuração ativa por empresa
+  // Se está criando uma config ativa, desativar todas as outras
   if (data.isActive) {
     await EmailConfig.update(
       { isActive: false },
       { where: { companyId: data.companyId } }
     );
+  }
+
+  // Se não especificou isActive, verificar se já existe alguma ativa
+  // Se não existir nenhuma, esta será a ativa por padrão
+  if (data.isActive === undefined) {
+    const existingActive = await EmailConfig.findOne({
+      where: { companyId: data.companyId, isActive: true }
+    });
+    data.isActive = !existingActive; // Ativa se não houver nenhuma ativa
   }
 
   // Criptografar senha
